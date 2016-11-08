@@ -20,12 +20,12 @@ class Person: NetworkModel {
     var longitude: Double?
     var created: String?
     var radius: Double?
-    var caughtUserId: String?
-    var conversationID: String?
+    var caughtUserId: Int?
+    var conversationId: String?
     var recipientId: String?
     var recipientName: String?
     var lastMessage: String?
-    var messageCount: String?
+    var messageCount: Int?
     var senderId: String?
     var senderName: String?
     var recipientAvatarBase64: String?
@@ -42,7 +42,6 @@ class Person: NetworkModel {
         case catchPerson
         case caught
         case conversations
-        case conversation
         case register
         case login
         
@@ -60,15 +59,80 @@ class Person: NetworkModel {
         longitude = try? json.getDouble(at: Constants.Person.longitude)
         created = try? json.getString(at: Constants.Person.created)
         radius = try? json.getDouble(at: Constants.Person.radius)
+        caughtUserId = try? json.getInt(at: Constants.Person.caughtUserId)
+        conversationId = try? json.getString(at: Constants.Person.conversationId)
+        recipientId = try? json.getString(at: Constants.Person.recipientId)
+        recipientName = try? json.getString(at: Constants.Person.recipientName)
+        lastMessage = try? json.getString(at: Constants.Person.lastMessage)
+        
+        messageCount = try? json.getInt(at: Constants.Person.messageCount)
+        senderId = try? json.getString(at: Constants.Person.senderId)
+        senderName = try? json.getString(at: Constants.Person.senderName)
+        recipientAvatarBase64 = try? json.getString(at: Constants.Person.recipientAvatarBase64)
+        senderAvatarBase64 = try? json.getString(at: Constants.Person.senderAvatarBase64)
+        grant_type = try? json.getString(at: Constants.Person.grantType)
+        expiration = try? json.getInt(at: Constants.Person.expiration)
+        
     }
     
+    init(userId: String, userName: String, avatarBase64: String, longitude: Double, latitude: Double, created: String) {
+        self.userId = userId
+        self.userName = userName
+        self.avatarBase64 = avatarBase64
+        self.longitude = longitude
+        self.latitude = latitude
+        self.created = created
+        requestType = .nearby
+    }
+    
+    init(longitude: Double, latitude: Double) {
+        self.longitude = longitude
+        self.latitude = latitude
+        requestType = .checkIn
+    }
+    
+    init(caughtUserId: Int, radius: Double) {
+        self.caughtUserId = caughtUserId
+        self.radius = radius
+        requestType = .catchPerson
+    }
+    init(userId: String, userName: String, created: String, avatarBase64: String) {
+        self.userId = userId
+        self.userName = userName
+        self.created = created
+        self.avatarBase64 = avatarBase64
+        requestType = .caught
+    }
+    
+    init(conversationId: Int, recipientId: String, recipientName: String, lastMessage: String, created: String, messageCount: Int, avatarBase64: String, senderId: String, senderName: String, recipientAvatarBase64: String, senderAvatarBase64: String) {
+        self.conversationId = "0"
+        self.recipientId = recipientId
+        self.recipientName = recipientName
+        self.lastMessage = lastMessage
+        self.created = created
+        self.messageCount = messageCount
+        self.avatarBase64 = avatarBase64
+        self.senderId = senderId
+        self.senderName = senderName
+        self.recipientAvatarBase64 = recipientAvatarBase64
+        self.senderAvatarBase64 = senderAvatarBase64
+        requestType = .conversations
+
+    }
+
     // Always return HTTP.GET
     func method() -> Alamofire.HTTPMethod {
         switch requestType {
+        case .nearby:
+            return .get
         case .checkIn:
             return .post
         case .catchPerson:
             return .post
+        case .caught:
+            return .get
+        case .conversations:
+            return .get
         default:
             return .get
         }
@@ -86,8 +150,8 @@ class Person: NetworkModel {
             return "/v1/User/Caught"
         case .conversations:
             return "/v1/User/Conversations"
-        case .conversation:
-            return "/v1/User/Conversation"
+        //case .conversation:
+            //return "/v1/User/Conversation"
         case .login:
             return "/token"
         case .register:
@@ -123,97 +187,7 @@ class Person: NetworkModel {
 
     
 }
-/*
 
-// Just a test object to excercise the network stack
-class Category : NetworkModel {
-    /*
-     "id": 0,
-     "name": "string",
-     "amount": 0
-     */
-    
-    var id : Int?
-    var name : String?
-    var amount : Double?
-    
-    var startDate : String?
-    var endDate : String?
-    
-    // Request Type
-    enum RequestType {
-        case create
-        case week
-        case month
-    }
-    var requestType = RequestType.week
-    
-    var searchDate : Date?
-    
-    // empty constructor
-    required init() {}
-    
-    // create an object from JSON
-    required init(json: JSON) throws {
-        id = try? json.getInt(at: Constants.Category.id)
-        name = try? json.getString(at: Constants.Category.name)
-        amount = try? json.getDouble(at: Constants.Category.amount)
-    }
-    
-    init(name: String, amount: Double) {
-        self.name = name
-        self.amount = amount
-        requestType = .create
-    }
-    
-    init(month: Date) {
-        requestType = .month
-        searchDate = month
-    }
-    
-    init(week:Date) {
-        requestType = .week
-        searchDate = week
-    }
-    
-    // Always return HTTP.GET
-    func method() -> Alamofire.HTTPMethod {
-        switch requestType {
-        case .create:
-            return .post
-        default:
-            return .get
-        }
-    }
-    
-    // A sample path to a single post
-    func path() -> String {
-        switch requestType {
-        case .create:
-            return "/api/category/createCategory"
-        case .week:
-            return "/api/category/getCategory/year/\(searchDate!.year())/month/\(searchDate!.month())/day/\(searchDate!.day())"
-        case .month:
-            return "/api/category/getCategory/year/\(searchDate!.year())/month/\(searchDate!.month())"
-        }
-    }
-    
-    // Demo object isn't being posted to a server, so just return nil
-    func toDictionary() -> [String: AnyObject]? {
-        switch requestType {
-        case .create:
-            let startDate = Utils.adjustedTime().toString(.iso8601(nil))
-            
-            var params: [String: AnyObject] = [:]
-            params[Constants.Category.name] = name as AnyObject?
-            params[Constants.Category.amount] = amount as AnyObject?
-            params[Constants.Category.startDate] = startDate as AnyObject?
-            
-            return params
-        default:
-            return nil
-        }
-    }*/
     
 
 
