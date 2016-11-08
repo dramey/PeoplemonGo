@@ -43,11 +43,11 @@ struct Constants {
         static let newPassword = "NewPassword"
         static let confirmPassword = "ConfirmPassword"
         static let apiKey = "ApiKey"
-        static let password = "Password"
+        static let password = "password"
         static let grantType = "grant_type"
         static let userName = "username"
-        static let token = "token"
-        static let expirationDate = "expiration"
+        static let token = "access_token"
+        static let expirationDate = ".expires"
         
        
        

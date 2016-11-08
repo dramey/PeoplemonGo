@@ -71,9 +71,10 @@ class User : NetworkModel {
         
     }
     //parameters email and password
-    init(email: String, password: String) {
+    init(email: String, password: String, grantType: String) {
         self.email = email
         self.password = password
+        self.grantType = grantType
         requestType = .login
     }
     init(fullName: String, avatarBase64: String) {
@@ -161,9 +162,10 @@ class User : NetworkModel {
             params[Constants.User.apiKey] = apiKey as AnyObject?
             
         case .login:///login parameters with granttype username and password make username = email
-            params[Constants.User.email] = email as AnyObject?
+            params[Constants.User.grantType] = "password" as AnyObject?
+            params[Constants.User.userName] = email as AnyObject?
             params[Constants.User.password] = password as AnyObject?
-            params[Constants.User.grantType] = grantType as AnyObject?
+            print(params)
             
         default:
             break

@@ -129,9 +129,14 @@ extension WebServices {
         completion(objects, errorString)
     }
     func authUser<T: NetworkModel>(_ user: T, completion:@escaping (_ user: T?, _ error: String?) -> ()) {
-        request(WebServices.shared.baseURL + user.path(), method: user.method(), parameters: user.toDictionary(), encoding: URLEncoding.default)
-            .responseJSON { (response) in
+        print("the user...")
+        print(user)
+        // going to introduce a let temp
+        let temp = request(WebServices.shared.baseURL + user.path(), method: user.method(), parameters: user.toDictionary(), encoding: URLEncoding.default)
+        print(temp)
+        temp.responseJSON { (response) in
                 WebServices.parseResponseObject(response: response, completion: completion)
+            
         }
     }
     

@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
         MBProgressHUD.showAdded(to: view, animated: true)    //this is the spinny wheel
         
         
-        let user = User(email: email, password: password)
+        let user = User(email: email, password: password, grantType: "password")
         
         UserStore.shared.login(user) { (success, error) in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -44,6 +44,7 @@ class LoginViewController: UIViewController {
             
             //if success going back to main
             if success{
+                
                 self.dismiss(animated: true, completion: nil)
                 
             }else if let error = error {
