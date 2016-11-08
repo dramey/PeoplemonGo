@@ -22,7 +22,7 @@ class RegisterViewController: UIViewController {
     @IBAction func Register(_ sender: AnyObject) {
         
         //validate user input
-        guard let username = UserNameText.text, username != "" else {
+        guard let fullName = UserNameText.text, fullName != "" else {
             //show error
             let alert = Utils.createAlert("Login Error", message: "Please provide a UserName", dismissButtonTitle: "Close")
             present(alert, animated: true, completion: nil)
@@ -45,13 +45,15 @@ class RegisterViewController: UIViewController {
                 return
                 
         }
+      
+
         //Going to go ahead with the register save
         
         //show something on screen that shows what we are doing-- HUD--heads up display
         MBProgressHUD.showAdded(to: view, animated: true)    //this is the spinny wheel
         
         
-        let user = User(username: username, password: password, email: email)
+        let user = User(fullName: fullName, password: password, email: email, avatarBase64: "placeholder", apiKey: Constants.apiKey)//register
         
         UserStore.shared.register(user) { (success, error) in
             MBProgressHUD.hide(for: self.view, animated: true)

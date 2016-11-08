@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func Login(_ sender: UIButton) {
-        guard let username = UserNameText.text, username != "" else {
+        guard let email = UserNameText.text, email != "" else {
             //show error
             let alert = Utils.createAlert("Login Error", message: "Please provide a UserName", dismissButtonTitle: "Close")
             present(alert, animated: true, completion: nil)
@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
         MBProgressHUD.showAdded(to: view, animated: true)    //this is the spinny wheel
         
         
-        let user = User(username: username, password: password)
+        let user = User(email: email, password: password)
         
         UserStore.shared.login(user) { (success, error) in
             MBProgressHUD.hide(for: self.view, animated: true)

@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 struct Constants {
+    static let monthDayYear = "MM/dd/yyyy"
+    
     
     // Keychain strings
     public static let keychainIdentifier = "PeoplemonKeychain"
@@ -30,21 +32,45 @@ struct Constants {
     struct User {
         static let id = "id"
         static let email = "email"
-        static let username = "username"
+        static let fullName = "fullName"
+        static let userName = "username"
         static let password = "password"
-        static let apiKey = "apiKey"
+        static let token = "token"
+        static let apiKey = "ApiKey"
         static let expirationDate = "expiration"
+        static let AvatarBase64 = "AvatarBase64"
+        static let grantType = "grant_type"
+        static let HasRegistered = "true"
+        static let LoginProvider = "LoginProvider"
+        static let LastCheckInLongitude = "0"
+        static let LastCheckInLatitude = "0"
+        static let LastCheckInDateTime = "date"
+        static let oldPassword = "oldPassword"
+        static let newPassword = "newPassword"
+        static let confirmPassword = "confirmPassword"
+
     }
     
     // Person Constants
     struct Person {
         static let userId = "userId"
         static let userName = "userName"
-        static let avatar = "avatar"
+        static let avatarBase64 = "avatarBase64"
         static let latitude = "latitude"
         static let longitude = "longitude"
         static let created = "created"
         static let radius = "radius"
+        static let caughtUserId = "caughtUserId"
+        static let conversationID = "conversationId"
+        static let recipientId = "recipientName"
+        static let lastMessage = "lastMessage"
+        static let messageCount = "messageCount"
+        static let senderId = "senderId"
+        static let senderName = "senderName"
+        static let recipientAvatarBase64 = "recipientAvatarBase64"
+        static let senderAvatarBase64 = "senderAvatarBase64"
+        static let grantType = "grant_type"
+        static let expiration = "expiration"
     
     }
    

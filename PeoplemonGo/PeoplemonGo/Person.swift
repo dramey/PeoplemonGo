@@ -1,5 +1,5 @@
 //
-//  Person.swift
+//  User.swift
 //  PeoplemonGo
 //
 //  Created by Deb Ramey on 11/6/16.
@@ -15,11 +15,24 @@ class Person: NetworkModel {
 
     var userId: String?
     var userName: String?
-    var avatar: String?
+    var avatarBase64: String?
     var latitude: Double?
     var longitude: Double?
     var created: String?
     var radius: Double?
+    var caughtUserId: String?
+    var conversationID: String?
+    var recipientId: String?
+    var recipientName: String?
+    var lastMessage: String?
+    var messageCount: String?
+    var senderId: String?
+    var senderName: String?
+    var recipientAvatarBase64: String?
+    var senderAvatarBase64: String?
+    var grant_type: String?
+    var expiration: Int?
+
     
     
     
@@ -30,6 +43,8 @@ class Person: NetworkModel {
         case caught
         case conversations
         case conversation
+        case register
+        case login
         
     }
    var requestType: RequestType = .nearby
@@ -40,7 +55,7 @@ class Person: NetworkModel {
     required init(json: JSON) throws {
         userId = try? json.getString(at: Constants.Person.userId)
         userName = try? json.getString(at: Constants.Person.userName)
-        avatar = try? json.getString(at: Constants.Person.avatar)
+        avatarBase64 = try? json.getString(at: Constants.Person.avatarBase64)
         latitude = try? json.getDouble(at: Constants.Person.latitude)
         longitude = try? json.getDouble(at: Constants.Person.longitude)
         created = try? json.getString(at: Constants.Person.created)
@@ -69,12 +84,15 @@ class Person: NetworkModel {
             return "/v1/User/Catch"
         case .caught:
             return "/v1/User/Caught"
-            
         case .conversations:
             return "/v1/User/Conversations"
-            
         case .conversation:
             return "/v1/User/Conversation"
+        case .login:
+            return "/token"
+        case .register:
+            return "/api/Account/Register"
+
         }
     }
     // Demo object isn't being posted to a server, so just return nil
