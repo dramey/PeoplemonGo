@@ -30,48 +30,55 @@ struct Constants {
     
     // User Constants
     struct User {
-        static let id = "id"
-        static let email = "email"
-        static let fullName = "fullName"
-        static let userName = "username"
-        static let password = "password"
-        static let token = "token"
-        static let apiKey = "ApiKey"
-        static let expirationDate = "expiration"
+        static let id = "Id"
+        static let email = "Email"
+        static let hasRegistered = "HasRegistered"
+         static let loginProvider = "LoginProvider"
+        static let fullName = "FullName"
         static let avatarBase64 = "AvatarBase64"
+        static let lastCheckInLongitude = "LastCheckInLongitude"
+        static let lastCheckInLatitude = "LastCheckInLatitude"
+        static let lastCheckInDateTime = "LastCheckInDateTime"
+        static let oldPassword = "OldPassword"
+        static let newPassword = "NewPassword"
+        static let confirmPassword = "ConfirmPassword"
+        static let apiKey = "ApiKey"
+        static let password = "Password"
         static let grantType = "grant_type"
-        static let hasRegistered = "true"
-        static let loginProvider = "LoginProvider"
-        static let lastCheckInLongitude = "0"
-        static let lastCheckInLatitude = "0"
-        static let lastCheckInDateTime = "date"
-        static let oldPassword = "oldPassword"
-        static let newPassword = "newPassword"
-        static let confirmPassword = "confirmPassword"
+        static let userName = "username"
+        static let token = "token"
+        static let expirationDate = "expiration"
+        
+       
+       
+       
+        
+        
+        
 
     }
     
     // Person Constants
     struct Person {
-        static let userId = "userId"
-        static let userName = "userName"
-        static let avatarBase64 = "avatarBase64"
-        static let latitude = "latitude"
-        static let longitude = "longitude"
-        static let created = "date"
-        static let radius = "radius"
-        static let caughtUserId = "caughtUserId"
-        static let conversationId = "conversationId"
-        static let recipientId = "recipientId"
-        static let recipientName = "recipientName"
-        static let lastMessage = "lastMessage"
-        static let messageCount = "messageCount"
-        static let senderId = "senderId"
-        static let senderName = "senderName"
-        static let recipientAvatarBase64 = "recipientAvatarBase64"
-        static let senderAvatarBase64 = "senderAvatarBase64"
+        static let userId = "UserId"
+        static let userName = "UserName"
+        static let avatarBase64 = "AvatarBase64"
+         static let longitude = "Longitude"
+        static let latitude = "Latitude"
+        static let created = "Created"
+        static let radius = "RadiusInMeters"
+        static let caughtUserId = "CaughtUserId"
+        static let conversationId = "ConversationId"
+        static let recipientId = "RecipientId"
+        static let recipientName = "RecipientName"
+        static let lastMessage = "LastMessage"
+        static let messageCount = "MessageCount"
+        static let senderId = "SenderId"
+        static let senderName = "SenderName"
+        static let recipientAvatarBase64 = "RecipientAvatarBase64"
+        static let senderAvatarBase64 = "SenderAvatarBase64"
         static let grantType = "grant_type"
-        static let expiration = "expiration"
+        static let expiration = "Expiration"
     
     }
    

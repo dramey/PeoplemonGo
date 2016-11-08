@@ -120,6 +120,7 @@ class User : NetworkModel {
     //}
     
     // Always return HTTP.GET
+    //determines the HTTP method we will use in our calls. Can use conditionals to determine this based on the endpoint we are calling or what we decide we would like to do
     func method() -> Alamofire.HTTPMethod {
         switch requestType{
         case .getUserInfo:
@@ -128,7 +129,7 @@ class User : NetworkModel {
             return .post
         }
     }
-    
+    //determines the path we will append to the API base URL //we switch this endpoint based on what type of request we would like to make
     // A sample path to a single post
     func path() -> String {
         switch requestType {
