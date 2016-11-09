@@ -75,13 +75,8 @@ class Person: NetworkModel {
         
     }
     
-    init(userId: String, userName: String, avatarBase64: String, longitude: Double, latitude: Double, created: String) {
-        self.userId = userId
-        self.userName = userName
-        self.avatarBase64 = avatarBase64
-        self.longitude = longitude
-        self.latitude = latitude
-        self.created = created
+    init(radius: Double) {
+        self.radius = radius
         requestType = .nearby
     }
     
@@ -141,7 +136,7 @@ class Person: NetworkModel {
     func path() -> String {
         switch requestType {
         case .nearby:
-            return "/v1/User/Nearby"
+            return "/v1/User/Nearby?radiusInMeters=\(radius))"
         case .checkIn:
             return "/v1/User/CheckIn"
         case .catchPerson:
