@@ -166,7 +166,6 @@ class Person: NetworkModel {
             //let startDate = Utils.adjustedTime().toString(.iso8601(nil))
             
             var params: [String: AnyObject] = [:]
-            params[Constants.Person.userName] = userName as AnyObject?
             params[Constants.Person.latitude] = latitude as AnyObject?
             params[Constants.Person.longitude] = longitude as AnyObject?
             

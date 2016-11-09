@@ -3,13 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="Ceo-FY-fgM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i0k-Uh-i9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ptG-We-E16" customClass="MapViewController" customModule="PeoplemonGo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aD6-A7-ce3"/>
@@ -27,11 +27,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="JJv-FE-Ttw">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="a5Z-c1-SMh">
-                            <connections>
-                                <action selector="logout:" destination="ptG-We-E16" id="0at-lh-8Wp"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Logout" id="a5Z-c1-SMh">
+                                <connections>
+                                    <action selector="logout:" destination="ptG-We-E16" id="0at-lh-8Wp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="CheckIn" id="sNR-rt-JjR">
+                                <connections>
+                                    <action selector="CheckIn:" destination="ptG-We-E16" id="bFW-y5-wZ7"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="User Profile" id="3xy-Yj-zff">
                             <connections>
                                 <segue destination="Mfw-SM-bAi" kind="show" id="BaV-n1-L8u"/>
@@ -44,6 +51,7 @@
                         <segue destination="Vi0-4w-oUB" kind="presentation" identifier="PresentLoginNoAnimation" animates="NO" id="b50-Lq-S4e"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0k-Uh-i9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-118" y="-351"/>
         </scene>

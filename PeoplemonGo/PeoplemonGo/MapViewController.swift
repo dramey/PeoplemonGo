@@ -29,17 +29,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             self.mapView.showsUserLocation = true
             self.locationManager.startUpdatingLocation()
             
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: {(timer:Timer) in
-                
-                if let coordinate = self.locationManager.location?.coordinate{
-                    let annonation = MKPointAnnotation ()
-                    annonation.coordinate = coordinate
-                    
-                    annonation.coordinate.latitude += (Double(arc4random_uniform(1000)) - 500)/300000.0
-                    annonation.coordinate.longitude += (Double(arc4random_uniform(1000)) - 500)/300000.0
-                    self.mapView.addAnnotation(annonation)
-                }
-            })
             
         }else{
             self .locationManager.requestWhenInUseAuthorization()
@@ -47,13 +36,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
-        if updateLocation < 4 {
-            let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 1000, 1000)
-            self.mapView.setRegion(myArea, animated: true)
-        }
-        updateLocation += 1
+        //if updateLocation < 4 {
+        let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 1000, 1000)
+        self.mapView.setRegion(myArea, animated: true)
+        // }
+        // updateLocation += 1
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,16 +61,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         UserStore.shared.logout{
             self.performSegue(withIdentifier: "PresentLogin", sender: self)
         }
-
+        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func CheckIn(_ sender: AnyObject) {
+        //get the location
+        if let location = locationManager.location{
+            
+            
+            
+            //create user object with that location
+            let person = Person(longitude: location.coordinate.longitude, latitude: location.coordinate.latitude )
+            
+            //call webservices .post with the user object
+            WebServices.shared.postObject(person, completion: { (person, error) in
+                if let error = error {
+                    self.present(Utils.createAlert(message: error), animated: true, completion: nil)
+                }else{
+                    self.present(Utils.createAlert("Awesome!", message: "You are Checked In 😀"),  animated: true, completion: nil)
+                    
+                }
+                
+            })
+            
+            
+        }
+        
+        /*
+         // MARK: - Navigation
+         
+         // In a storyboard-based application, you will often want to do a little preparation before navigation
+         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destinationViewController.
+         // Pass the selected object to the new view controller.
+         }
+         */
+        
     }
-    */
-
 }
