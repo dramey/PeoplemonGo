@@ -11,17 +11,47 @@ import MapKit
 import MBProgressHUD
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
     
-    
+    let locationManager = CLLocationManager()
+    var updateLocation = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view loaded")
         // Do any additional setup after loading the view.
+        self.locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+            self.mapView.showsUserLocation = true
+            self.locationManager.startUpdatingLocation()
+            
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: {(timer:Timer) in
+                
+                if let coordinate = self.locationManager.location?.coordinate{
+                    let annonation = MKPointAnnotation ()
+                    annonation.coordinate = coordinate
+                    
+                    annonation.coordinate.latitude += (Double(arc4random_uniform(1000)) - 500)/300000.0
+                    annonation.coordinate.longitude += (Double(arc4random_uniform(1000)) - 500)/300000.0
+                    self.mapView.addAnnotation(annonation)
+                }
+            })
+            
+        }else{
+            self .locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        
+        if updateLocation < 4 {
+            let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 1000, 1000)
+            self.mapView.setRegion(myArea, animated: true)
+        }
+        updateLocation += 1
     }
 
     override func didReceiveMemoryWarning() {
