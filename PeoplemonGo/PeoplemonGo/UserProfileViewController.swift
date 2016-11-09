@@ -1,5 +1,5 @@
 //
-//  MapViewController.swift
+//  UserProfileViewController.swift
 //  PeoplemonGo
 //
 //  Created by Deb Ramey on 11/8/16.
@@ -7,20 +7,12 @@
 //
 
 import UIKit
-import MapKit
-import MBProgressHUD
-import CoreLocation
 
-class MapViewController: UIViewController {
-    
-    @IBOutlet weak var mapView: MKMapView!
-    
-    
-    
-    
+class UserProfileViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view loaded")
+
         // Do any additional setup after loading the view.
     }
 
@@ -29,21 +21,7 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //print("view appeared")
-        if !WebServices.shared.userAuthTokenExists() || WebServices.shared.userAuthTokenExpired(){
-            performSegue(withIdentifier: "PresentLoginNoAnimation", sender: self)
-            //print("I got here")
-        }
-    }
-    //Mark - @IBActions
-    @IBAction func logout(_ sender: Any) {
-        UserStore.shared.logout{
-            self.performSegue(withIdentifier: "PresentLogin", sender: self)
-        }
 
-    }
     /*
     // MARK: - Navigation
 

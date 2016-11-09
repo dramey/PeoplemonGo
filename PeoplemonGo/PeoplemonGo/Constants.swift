@@ -14,10 +14,10 @@ struct Constants {
     
     
     // Keychain strings
-    public static let keychainIdentifier = "PeoplemonKeychain"
+    public static let keychainIdentifier = "PeoplemonGoKeychain"
     public static let authTokenExpireDate = "authTokenExpireDate"
     public static let authToken = "authToken"
-    static let apiKey = "iOSandriod301november2016"
+    static let apiKey = "iOS301november2016"
     static let radius = 100.0
     
 
@@ -48,13 +48,6 @@ struct Constants {
         static let userName = "username"
         static let token = "access_token"
         static let expirationDate = ".expires"
-        
-       
-       
-       
-        
-        
-        
 
     }
     

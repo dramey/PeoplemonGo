@@ -19,21 +19,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iAL-X3-Qaj">
-                                <frame key="frameInset" minY="72" width="375" height="595"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAL-X3-Qaj">
+                                <frame key="frameInset" minX="-9" width="384" height="659"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="04K-Oo-enk"/>
+                    <navigationItem key="navigationItem" id="JJv-FE-Ttw">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="a5Z-c1-SMh">
+                            <connections>
+                                <action selector="logout:" destination="ptG-We-E16" id="0at-lh-8Wp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="User Profile" id="3xy-Yj-zff">
+                            <connections>
+                                <segue destination="Mfw-SM-bAi" kind="show" id="BaV-n1-L8u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="iAL-X3-Qaj" id="hKM-sy-ven"/>
                         <segue destination="Vi0-4w-oUB" kind="presentation" identifier="PresentLogin" id="1bb-aO-dpa"/>
-                        <segue destination="Vi0-4w-oUB" kind="presentation" identifier="PresentLoginNoAnimation" id="b50-Lq-S4e"/>
+                        <segue destination="Vi0-4w-oUB" kind="presentation" identifier="PresentLoginNoAnimation" animates="NO" id="b50-Lq-S4e"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-92" y="-342.27886056971516"/>
+            <point key="canvasLocation" x="-118" y="-351"/>
+        </scene>
+        <!--User Profile-->
+        <scene sceneID="hXg-3S-UX4">
+            <objects>
+                <viewController id="Mfw-SM-bAi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zAZ-6R-lg0"/>
+                        <viewControllerLayoutGuide type="bottom" id="28O-um-FYc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="T83-QQ-oGs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgA-gl-Hig">
+                                <frame key="frameInset" minX="100" minY="64" width="174" height="143"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ez2-7v-RTX">
+                                <frame key="frameInset" minX="16" minY="215" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="User Profile" id="166-Ya-dBV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dIj-Xm-Tkt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="548" y="-351.27436281859076"/>
         </scene>
         <!--Login-->
         <scene sceneID="knc-qB-vOL">
