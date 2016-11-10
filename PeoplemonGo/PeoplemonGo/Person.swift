@@ -48,7 +48,7 @@ class Person: NetworkModel {
     }
    var requestType: RequestType = .nearby
    
-    required init() {}
+    required init() {requestType = .caught}
     
     // create an object from JSON
     required init(json: JSON) throws {
@@ -156,32 +156,26 @@ class Person: NetworkModel {
     }
     // Demo object isn't being posted to a server, so just return nil
     func toDictionary() -> [String: AnyObject]? {
+        var params: [String: AnyObject] = [:]
         switch requestType {
         case .checkIn:
             //let startDate = Utils.adjustedTime().toString(.iso8601(nil))
-            
-            var params: [String: AnyObject] = [:]
             params[Constants.Person.latitude] = latitude as AnyObject?
             params[Constants.Person.longitude] = longitude as AnyObject?
-            
-            return params
         case .catchPerson:
             //needs work
-            var params: [String: AnyObject] = [:]
             params[Constants.Person.caughtUserId] = caughtUserId as AnyObject?
             params[Constants.Person.radius] = radius as AnyObject?
            // params[Constants.Person.longitude] = longitude as AnyObject?
-            
-            return params
         case .nearby:
-            var params: [String: AnyObject] = [:]
             params[Constants.Person.radius] = radius as AnyObject?
-            return params
+        case .caught:
+            break
         default:
-            return nil
-        }
+            break
     }
-
+        return params
+    }
 
     
 }

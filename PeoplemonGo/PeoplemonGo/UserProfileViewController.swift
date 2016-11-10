@@ -16,11 +16,6 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var newPassword: UITextField!
     
     
-    
-    
-    
-    
-    
     var gestureRecognizer: UITapGestureRecognizer!
     
     

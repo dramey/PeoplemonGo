@@ -43,12 +43,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }else{
             self.locationManager.requestWhenInUseAuthorization()
         }
+        mapView.mapType = MKMapType.hybrid
         loadMap()
     }
     func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
        
         let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 1000, 1000)
         self.mapView.setRegion(myArea, animated: true)
+        updateLocation = false
+        locationManager.stopUpdatingLocation()
        
     }
     

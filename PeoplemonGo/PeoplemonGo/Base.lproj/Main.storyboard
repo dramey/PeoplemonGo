@@ -7,22 +7,34 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--List of Caught People-->
         <scene sceneID="XLi-4b-WK4">
             <objects>
-                <tableViewController id="n5O-sk-uLH" sceneMemberID="viewController">
+                <tableViewController id="n5O-sk-uLH" customClass="CaughtTableViewController" customModule="PeoplemonGo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AQt-ef-7pd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="D40-Id-OwH">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CaughtTableViewCell" id="D40-Id-OwH" customClass="CaughtTableViewCell" customModule="PeoplemonGo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D40-Id-OwH" id="Tae-Pl-Vch">
                                     <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmH-sn-SeC">
+                                            <frame key="frameInset" minX="26" minY="8" width="66" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="caughtLabel" destination="gmH-sn-SeC" id="ZyC-WI-biE"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -30,11 +42,17 @@
                             <outlet property="delegate" destination="n5O-sk-uLH" id="XTA-As-evv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="oYF-Pz-k5P"/>
+                    <navigationItem key="navigationItem" title="List of Caught People" id="oYF-Pz-k5P">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="VGD-Hb-ez7">
+                            <connections>
+                                <segue destination="ptG-We-E16" kind="show" id="hKn-4l-b8l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6O-Ry-wJu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="68" y="-1233"/>
+            <point key="canvasLocation" x="68" y="-1233.7331334332835"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kBM-YH-0f8">
@@ -84,11 +102,20 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="User Profile" id="3xy-Yj-zff">
-                            <connections>
-                                <segue destination="Mfw-SM-bAi" kind="show" identifier="addUserProfile" id="BaV-n1-L8u"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="User Profile" id="3xy-Yj-zff">
+                                <connections>
+                                    <segue destination="Mfw-SM-bAi" kind="show" identifier="addUserProfile" id="BaV-n1-L8u"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem id="7QL-x4-SN3">
+                                <string key="title">Caught
+</string>
+                                <connections>
+                                    <segue destination="JT9-gP-dDD" kind="show" id="0JW-NT-xzn"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="iAL-X3-Qaj" id="hKM-sy-ven"/>
@@ -210,6 +237,7 @@
         <image name="jimCarrey" width="236" height="298"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b50-Lq-S4e"/>
+        <segue reference="1bb-aO-dpa"/>
+        <segue reference="hKn-4l-b8l"/>
     </inferredMetricsTieBreakers>
 </document>
