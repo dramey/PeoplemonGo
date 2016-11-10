@@ -27,6 +27,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mapView.delegate = self
+
         print("view loaded")
         // Do any additional setup after loading the view.
         self.locationManager.delegate = self
@@ -146,8 +148,9 @@ extension MapViewController: MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = false
-            pinView!.animatesDrop = false
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+            
         } else{
             pinView!.annotation = annotation
         }
@@ -162,7 +165,7 @@ extension MapViewController: MKMapViewDelegate {
                     if let error = error{
                         self.present(Utils.createAlert(message: error), animated: true, completion: nil)
                     } else{
-                        self.present(Utils.createAlert(message: "User Caught"), animated: true, completion: nil)
+                        self.present(Utils.createAlert("AWESOME!", message: "User Caught"), animated: true, completion: nil)
                     }
                 })
             }))

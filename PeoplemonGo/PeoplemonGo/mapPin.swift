@@ -12,11 +12,13 @@ import MapKit
 class MapPin: NSObject, MKAnnotation {
     var coordinate:CLLocationCoordinate2D
     var person: Person?
-    //var title: String?
+    var title: String?
+    var userid: String?
     
     init(person: Person){
         self.person = person
-        //self.title = title
+        self.title = person.userName
+        self.userid = person.userId
         if let lat = person.latitude, let long = person.longitude{
             self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
             
