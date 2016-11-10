@@ -25,6 +25,7 @@ extension WebServices {
     func postObject<T: NetworkModel>(_ model: T, completion: @escaping (_ object: T?, _ error: String?) -> Void) {
         request(AuthRouter.restRequest(model)).responseJSON { (response) in
             WebServices.parseResponseObject(response: response, completion: completion)
+            print(response)
         }
     }
     

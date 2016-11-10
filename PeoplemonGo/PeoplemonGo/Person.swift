@@ -20,7 +20,7 @@ class Person: NetworkModel {
     var longitude: Double?
     var created: String?
     var radius: Double?
-    var caughtUserId: Int?
+    var caughtUserId: String?
     var conversationId: String?
     var recipientId: String?
     var recipientName: String?
@@ -59,7 +59,7 @@ class Person: NetworkModel {
         longitude = try? json.getDouble(at: Constants.Person.longitude)
         created = try? json.getString(at: Constants.Person.created)
         radius = try? json.getDouble(at: Constants.Person.radius)
-        caughtUserId = try? json.getInt(at: Constants.Person.caughtUserId)
+        caughtUserId = try? json.getString(at: Constants.Person.caughtUserId)
         conversationId = try? json.getString(at: Constants.Person.conversationId)
         recipientId = try? json.getString(at: Constants.Person.recipientId)
         recipientName = try? json.getString(at: Constants.Person.recipientName)
@@ -86,7 +86,7 @@ class Person: NetworkModel {
         requestType = .checkIn
     }
     
-    init(caughtUserId: Int, radius: Double) {
+    init(caughtUserId: String, radius: Double) {
         self.caughtUserId = caughtUserId
         self.radius = radius
         requestType = .catchPerson
@@ -136,7 +136,7 @@ class Person: NetworkModel {
     func path() -> String {
         switch requestType {
         case .nearby:
-            return "/v1/User/Nearby?radiusInMeters=\(radius))"
+            return "/v1/User/Nearby/"
         case .checkIn:
             return "/v1/User/CheckIn"
         case .catchPerson:
@@ -168,10 +168,14 @@ class Person: NetworkModel {
         case .catchPerson:
             //needs work
             var params: [String: AnyObject] = [:]
-            params[Constants.Person.userName] = userName as AnyObject?
-            params[Constants.Person.latitude] = latitude as AnyObject?
-            params[Constants.Person.longitude] = longitude as AnyObject?
+            params[Constants.Person.caughtUserId] = caughtUserId as AnyObject?
+            params[Constants.Person.radius] = radius as AnyObject?
+           // params[Constants.Person.longitude] = longitude as AnyObject?
             
+            return params
+        case .nearby:
+            var params: [String: AnyObject] = [:]
+            params[Constants.Person.radius] = radius as AnyObject?
             return params
         default:
             return nil

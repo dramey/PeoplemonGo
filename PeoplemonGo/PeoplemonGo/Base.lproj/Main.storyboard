@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D40-Id-OwH" id="Tae-Pl-Vch">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -86,7 +86,7 @@
                         </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="User Profile" id="3xy-Yj-zff">
                             <connections>
-                                <segue destination="Mfw-SM-bAi" kind="show" id="BaV-n1-L8u"/>
+                                <segue destination="Mfw-SM-bAi" kind="show" identifier="addUserProfile" id="BaV-n1-L8u"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -98,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0k-Uh-i9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-118" y="-351"/>
+            <point key="canvasLocation" x="-398" y="-461"/>
         </scene>
         <!--User Profile-->
         <scene sceneID="hXg-3S-UX4">
@@ -156,7 +156,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="User Profile" id="166-Ya-dBV">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="save" id="EER-Gt-pVh"/>
+                            <barButtonItem systemItem="save" id="EER-Gt-pVh">
+                                <connections>
+                                    <action selector="saveUser:" destination="Mfw-SM-bAi" id="Uoa-uI-gAE"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="camera" id="EbM-6Q-hC1">
                                 <connections>
                                     <action selector="choosePhoto:" destination="Mfw-SM-bAi" id="QCq-tF-fO4"/>
@@ -165,12 +169,15 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="fullNameText" destination="WaE-Nq-v9D" id="hsJ-tx-Tla"/>
                         <outlet property="imageView" destination="o2J-8g-8x2" id="ycu-Wb-C0J"/>
+                        <outlet property="newPassword" destination="5g3-Px-waq" id="1Oa-CJ-vKz"/>
+                        <outlet property="oldPassword" destination="ghS-Le-MIL" id="mDc-4R-0Pa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIj-Xm-Tkt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="548" y="-351.27436281859076"/>
+            <point key="canvasLocation" x="-2326" y="-449"/>
         </scene>
         <!--Login-->
         <scene sceneID="knc-qB-vOL">

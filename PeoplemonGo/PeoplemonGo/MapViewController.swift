@@ -8,8 +8,7 @@
 
 import UIKit
 import MapKit
-import MBProgressHUD
-import CoreLocation
+
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -17,14 +16,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     
     let locationManager = CLLocationManager()
-    var updateLocation = 0
-    var peopleNearby = [MapPin]()
+    var updateLocation = true
+    var latitudeDelta = 0.005
+    var longitudeDelta = 0.005
+    //var peopleNearby = [MapPin]()
+    var annotations: [MapPin] = []
+    var overlay: MKOverlay?
+    
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view loaded")
         // Do any additional setup after loading the view.
         self.locationManager.delegate = self
+        self.locationManager.distanceFilter = kCLDistanceFilterNone
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             self.mapView.showsUserLocation = true
@@ -34,6 +41,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }else{
             self.locationManager.requestWhenInUseAuthorization()
         }
+        loadMap()
     }
     func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
        
@@ -55,17 +63,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             //print("I got here")
         }
     }
-    func loadpeopleNearby(){
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        stopTimer()
+    }
+    
+    func loadMap(){
+        if let coordinate = locationManager.location?.coordinate {
+            let checkIn = Person(longitude: coordinate.longitude, latitude: coordinate.latitude)
+            WebServices.shared.postObject(checkIn, completion: { (object, error) in
+            })
+            
+        
+        }
         let peopleNearby = Person(radius: 100)
         WebServices.shared.getObjects(peopleNearby){
             (nearbyPeople, error) in
             if let nearbyPeople = nearbyPeople{
+                let otherAnnotations = self.annotations
+                self.annotations = []
                 for person in nearbyPeople {
                     let pin = MapPin(person: person)
-                    self.peopleNearby.append(pin)
+                    //self.peopleNearby.append(pin)
+                    self.annotations.append(pin)
                 }
+                self.mapView.addAnnotations(self.annotations)
+                self.mapView.removeAnnotations(otherAnnotations)
             }
         }
+    }
+    func beginTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(loadMap), userInfo: nil, repeats: true)
+    }
+    func stopTimer(){
+        timer?.invalidate()
+        timer = nil
     }
   
     
@@ -99,16 +131,62 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
             
         }
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destinationViewController.
-         // Pass the selected object to the new view controller.
-         }
-         */
+       loadMap()
+   
         
     }
 }
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = false
+            pinView!.animatesDrop = false
+        } else{
+            pinView!.annotation = annotation
+        }
+        return pinView
+    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let mapPin = view.annotation as? MapPin, let people = mapPin.person, let name = people.userName, let userId = people.userId {
+            let alert = UIAlertController(title: "Catch User", message: "Catch\(name)?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Catch", style: .default, handler: { (action) in
+                let catchPeople = Person(caughtUserId: userId, radius: Constants.radius)
+                WebServices.shared.postObject(catchPeople, completion: { (object, error) in
+                    if let error = error{
+                        self.present(Utils.createAlert(message: error), animated: true, completion: nil)
+                    } else{
+                        self.present(Utils.createAlert(message: "User Caught"), animated: true, completion: nil)
+                    }
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        self.overlay = overlay
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.green
+        renderer.lineWidth = 5.0
+        renderer.lineCap = CGLineCap.round
+        return renderer
+    }
+}
+//extension MapViewController: UserStoreDelegate {
+    //func userLoggedIn() {
+       // NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(beginTimer), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+       // stopTimer()
+       // beginTimer()
+    //}
+//}
+    
+
+

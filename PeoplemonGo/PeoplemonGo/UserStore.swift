@@ -45,8 +45,7 @@ class UserStore {
             }
         }
     }
-    
-    
+
     func logout(_ completion:() -> ()) {
         WebServices.shared.clearUserAuthToken()
         completion()

@@ -11,6 +11,15 @@ import UIKit
 class UserProfileViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var fullNameText: UITextField!
+    @IBOutlet weak var oldPassword: UITextField!
+    @IBOutlet weak var newPassword: UITextField!
+    
+    
+    
+    
+    
+    
     
     var gestureRecognizer: UITapGestureRecognizer!
     
@@ -20,6 +29,10 @@ class UserProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fullNameText.text = profileUser.fullName
+        oldPassword.text = profileUser.oldPassword
+        newPassword.text = profileUser.newPassword
         
         // Do any additional setup after loading the view.
         
@@ -75,6 +88,14 @@ class UserProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action) in self.showPicker(.photoLibrary)}))
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func saveUser(_ sender: AnyObject) {
+    }
+    
+    
+    
+    
 }
 extension UserProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     //implemented for us--no code--just include it--gives us the right to make functions to pull up picture or take camera pic
