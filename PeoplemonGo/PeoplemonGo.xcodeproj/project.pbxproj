@@ -10,6 +10,8 @@
 		A5B4EDF635767E9A9077531A /* Pods_PeoplemonGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E10EEBAEA79060C13CE4978 /* Pods_PeoplemonGo.framework */; };
 		D65B0EE21DD2463D00C456CC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B0EE11DD2463D00C456CC /* MapViewController.swift */; };
 		D65B0EE41DD2A11A00C456CC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B0EE31DD2A11A00C456CC /* UserProfileViewController.swift */; };
+		D68EBF0D1DD3ABA50080A01D /* profileUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68EBF0C1DD3ABA50080A01D /* profileUser.swift */; };
+		D68EBF0F1DD3BF600080A01D /* mapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68EBF0E1DD3BF600080A01D /* mapPin.swift */; };
 		D6C9480D1DCFFA6700B6AE13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C9480C1DCFFA6700B6AE13 /* AppDelegate.swift */; };
 		D6C9480F1DCFFA6700B6AE13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C9480E1DCFFA6700B6AE13 /* ViewController.swift */; };
 		D6C948121DCFFA6700B6AE13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C948101DCFFA6700B6AE13 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 		3E10EEBAEA79060C13CE4978 /* Pods_PeoplemonGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeoplemonGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65B0EE11DD2463D00C456CC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D65B0EE31DD2A11A00C456CC /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		D68EBF0C1DD3ABA50080A01D /* profileUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileUser.swift; sourceTree = "<group>"; };
+		D68EBF0E1DD3BF600080A01D /* mapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapPin.swift; sourceTree = "<group>"; };
 		D6C948091DCFFA6700B6AE13 /* PeoplemonGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeoplemonGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C9480C1DCFFA6700B6AE13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C9480E1DCFFA6700B6AE13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				D6C948291DD0047A00B6AE13 /* Constants.swift */,
 				D6C948271DD0046500B6AE13 /* Utils.swift */,
 				D6C9482B1DD004A500B6AE13 /* UserStore.swift */,
+				D68EBF0C1DD3ABA50080A01D /* profileUser.swift */,
+				D68EBF0E1DD3BF600080A01D /* mapPin.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -330,8 +336,10 @@
 				D65B0EE41DD2A11A00C456CC /* UserProfileViewController.swift in Sources */,
 				D6C9480D1DCFFA6700B6AE13 /* AppDelegate.swift in Sources */,
 				D6C948281DD0046500B6AE13 /* Utils.swift in Sources */,
+				D68EBF0F1DD3BF600080A01D /* mapPin.swift in Sources */,
 				D6C9483A1DD0091D00B6AE13 /* WebServicesExtension.swift in Sources */,
 				D6C9482F1DD0072A00B6AE13 /* User.swift in Sources */,
+				D68EBF0D1DD3ABA50080A01D /* profileUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

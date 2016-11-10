@@ -7,12 +7,16 @@
 //
 
 import Foundation
-
+import UIKit
 
 class UserStore {
     // singleton
     static let shared = UserStore()
+    
+    var selectedImage: UIImage?
+    
     private init() {}
+    
     
     func login(_ loginUser: User, completion:@escaping
         (_ success:Bool, _ error: String?) -> ()) {
@@ -41,6 +45,7 @@ class UserStore {
             }
         }
     }
+    
     
     func logout(_ completion:() -> ()) {
         WebServices.shared.clearUserAuthToken()

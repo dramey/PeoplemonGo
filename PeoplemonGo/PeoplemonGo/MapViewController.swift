@@ -18,6 +18,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     var updateLocation = 0
+    var peopleNearby = [MapPin]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +32,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
             
         }else{
-            self .locationManager.requestWhenInUseAuthorization()
+            self.locationManager.requestWhenInUseAuthorization()
         }
     }
     func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        
-        //if updateLocation < 4 {
+       
         let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 1000, 1000)
         self.mapView.setRegion(myArea, animated: true)
-        // }
-        // updateLocation += 1
+       
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,6 +55,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             //print("I got here")
         }
     }
+    func loadpeopleNearby(){
+        let peopleNearby = Person(radius: 100)
+        WebServices.shared.getObjects(peopleNearby){
+            (nearbyPeople, error) in
+            if let nearbyPeople = nearbyPeople{
+                for person in nearbyPeople {
+                    let pin = MapPin(person: person)
+                    self.peopleNearby.append(pin)
+                }
+            }
+        }
+    }
+  
+    
     //Mark - @IBActions
     @IBAction func logout(_ sender: Any) {
         UserStore.shared.logout{
@@ -63,7 +76,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
         
     }
-    
+
     @IBAction func CheckIn(_ sender: AnyObject) {
         //get the location
         if let location = locationManager.location{
@@ -71,7 +84,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
             
             //create user object with that location
-            let person = Person(longitude: location.coordinate.longitude, latitude: location.coordinate.latitude )
+            let person = Person(longitude: location.coordinate.longitude, latitude: location.coordinate.latitude)
             
             //call webservices .post with the user object
             WebServices.shared.postObject(person, completion: { (person, error) in
