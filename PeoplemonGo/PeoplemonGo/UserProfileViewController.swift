@@ -21,7 +21,6 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         if let user = UserStore.shared.user{
             
-            
             fullNameText.text = user.fullName
             
             
@@ -30,7 +29,7 @@ class UserProfileViewController: UIViewController {
             //if already has image we want to show it--if not we want to hide it
             if let image = Utils.stringToImage(str: user.avatarBase64){
                 imageView.image = image
-                addGestureRecognizer()
+               // addGestureRecognizer()
                 
             }else {
                 imageView.isHidden = true
@@ -43,10 +42,10 @@ class UserProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func addGestureRecognizer(){
-        gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewImage))
-        imageView.addGestureRecognizer(gestureRecognizer)
-    }
+   // func addGestureRecognizer(){
+       // gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewImage))
+       // imageView.addGestureRecognizer(gestureRecognizer)
+  //  }
     func viewImage(){
         if let image = imageView.image{
             UserStore.shared.selectedImage = image
@@ -65,8 +64,7 @@ class UserProfileViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+      
        
     }
     
@@ -91,13 +89,12 @@ class UserProfileViewController: UIViewController {
             return
         }
         let avatarImage = Utils.imageToString(image: imageView.image)
-        //print("Avatar Size: \(avatarImage?.characters.count)")
+        
         //create userModel
         let user = User(fullName: fullName, avatarBase64: avatarImage)
         
         
         //call webservices
-        
         WebServices.shared.postObject(user) { (object, error) in
             if error == nil{
                 //hit save button and updating the user shared model--placing the info back where it was
@@ -111,14 +108,9 @@ class UserProfileViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 
             }
-            
-            
+          
         }
-        
-        
-        
-        //show save message
-        
+      
     }
     
 }
@@ -143,10 +135,7 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
             imageView.image = resizedImage
             
             imageView.isHidden = false
-           // if gestureRecognizer != nil {
-           //     imageView.removeGestureRecognizer(gestureRecognizer)
-            //}
-            //addGestureRecognizer()
+           
         }
     }
 }

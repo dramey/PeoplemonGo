@@ -15,7 +15,6 @@
 		D68EBF0D1DD3ABA50080A01D /* profileUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68EBF0C1DD3ABA50080A01D /* profileUser.swift */; };
 		D68EBF0F1DD3BF600080A01D /* mapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68EBF0E1DD3BF600080A01D /* mapPin.swift */; };
 		D6C9480D1DCFFA6700B6AE13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C9480C1DCFFA6700B6AE13 /* AppDelegate.swift */; };
-		D6C9480F1DCFFA6700B6AE13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C9480E1DCFFA6700B6AE13 /* ViewController.swift */; };
 		D6C948121DCFFA6700B6AE13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C948101DCFFA6700B6AE13 /* Main.storyboard */; };
 		D6C948141DCFFA6700B6AE13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C948131DCFFA6700B6AE13 /* Assets.xcassets */; };
 		D6C948171DCFFA6700B6AE13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C948151DCFFA6700B6AE13 /* LaunchScreen.storyboard */; };
@@ -46,7 +45,6 @@
 		D68EBF0E1DD3BF600080A01D /* mapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapPin.swift; sourceTree = "<group>"; };
 		D6C948091DCFFA6700B6AE13 /* PeoplemonGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeoplemonGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C9480C1DCFFA6700B6AE13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D6C9480E1DCFFA6700B6AE13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D6C948111DCFFA6700B6AE13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6C948131DCFFA6700B6AE13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6C948161DCFFA6700B6AE13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,27 +119,18 @@
 		D6C9480B1DCFFA6700B6AE13 /* PeoplemonGo */ = {
 			isa = PBXGroup;
 			children = (
-				D6C9481E1DD002B800B6AE13 /* TableCells */,
 				D6C9481F1DD002D700B6AE13 /* ViewControllers */,
 				D6C948221DD0034200B6AE13 /* StoryBoards */,
 				D6C948261DD0041400B6AE13 /* Components */,
 				D6C9482D1DD004B200B6AE13 /* Models */,
 				D6C948321DD007B800B6AE13 /* Networking */,
 				D6C9480C1DCFFA6700B6AE13 /* AppDelegate.swift */,
-				D6C9480E1DCFFA6700B6AE13 /* ViewController.swift */,
 				D6C948131DCFFA6700B6AE13 /* Assets.xcassets */,
 				D6C948151DCFFA6700B6AE13 /* LaunchScreen.storyboard */,
 				D6C948181DCFFA6700B6AE13 /* Info.plist */,
 				D6C9483B1DD00A1800B6AE13 /* PeoplemonGo.entitlements */,
 			);
 			path = PeoplemonGo;
-			sourceTree = "<group>";
-		};
-		D6C9481E1DD002B800B6AE13 /* TableCells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = TableCells;
 			sourceTree = "<group>";
 		};
 		D6C9481F1DD002D700B6AE13 /* ViewControllers */ = {
@@ -336,7 +325,6 @@
 				D6C948411DD01BF500B6AE13 /* RegisterViewController.swift in Sources */,
 				D60864681DD4F4F3000FA5F1 /* CaughtTableViewController.swift in Sources */,
 				D6C948361DD008D100B6AE13 /* NetworkModel.swift in Sources */,
-				D6C9480F1DCFFA6700B6AE13 /* ViewController.swift in Sources */,
 				D65B0EE21DD2463D00C456CC /* MapViewController.swift in Sources */,
 				D6C948311DD0075900B6AE13 /* Person.swift in Sources */,
 				D60CBD3A1DD50526005E7D39 /* CaughtTableViewCell.swift in Sources */,

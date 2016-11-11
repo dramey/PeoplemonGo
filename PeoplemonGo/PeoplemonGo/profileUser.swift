@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class ProfileUser: NSObject, NSCoding{
+class ProfileUser: NSObject{
     
     var fullName = ""
    
@@ -31,13 +31,5 @@ class ProfileUser: NSObject, NSCoding{
        
        
     }
-    required init?(coder aDecoder: NSCoder) {
-        self.fullName = aDecoder.decodeObject(forKey: fullNameKey) as! String
-        self.image = aDecoder.decodeObject(forKey: imageKey) as? UIImage
-    }
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(fullName, forKey: fullNameKey)
-        aCoder.encode(image, forKey: imageKey)
-    }
-           }
+             }
    

@@ -123,11 +123,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if let location = locationManager.location{
             
             let coordinate = location.coordinate
-      
         }
        loadMap()
-   
-        
     }
     
 }
@@ -151,6 +148,7 @@ extension MapViewController: MKMapViewDelegate {
                     pinView?.clipsToBounds = false
                     pinView?.layer.borderWidth = 2
                     pinView?.layer.borderColor = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
+                    pinView?.layer.cornerRadius = 5
                 }else{
                     pinView?.image = nil
                 }
