@@ -149,25 +149,12 @@ extension MapViewController: MKMapViewDelegate {
                     pinView?.image = resizedImage
                     pinView?.contentMode = .scaleToFill
                     pinView?.clipsToBounds = false
+                    pinView?.layer.borderWidth = 2
+                    pinView?.layer.borderColor = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
                 }else{
                     pinView?.image = nil
                 }
-                
-                //resize image
-            // let size = CGSize(width: 10, height: 10)
-               // UIGraphicsBeginImageContext(size)
-               // image!.draw(in: , blendMode: , alpha: )
-    
-                
-                
-               // pinView!.image = image
-               //add three lines borders
-               // pinView?.layer.cornerRadius = Constants.pinImageSize
-              
-           // }
-        
-       // } else{
-           // pinView!.annotation = annotation
+          
         }
         }
         return pinView
@@ -190,14 +177,7 @@ extension MapViewController: MKMapViewDelegate {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        self.overlay = overlay
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.green
-        renderer.lineWidth = 5.0
-        renderer.lineCap = CGLineCap.round
-        return renderer
-    }
+  
 }
 
     

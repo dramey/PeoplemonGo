@@ -91,7 +91,7 @@ class UserProfileViewController: UIViewController {
             return
         }
         let avatarImage = Utils.imageToString(image: imageView.image)
-        print("Avatar Size: \(avatarImage?.characters.count)")
+        //print("Avatar Size: \(avatarImage?.characters.count)")
         //create userModel
         let user = User(fullName: fullName, avatarBase64: avatarImage)
         
@@ -143,10 +143,10 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
             imageView.image = resizedImage
             
             imageView.isHidden = false
-            if gestureRecognizer != nil {
-                imageView.removeGestureRecognizer(gestureRecognizer)
-            }
-            addGestureRecognizer()
+           // if gestureRecognizer != nil {
+           //     imageView.removeGestureRecognizer(gestureRecognizer)
+            //}
+            //addGestureRecognizer()
         }
     }
 }
