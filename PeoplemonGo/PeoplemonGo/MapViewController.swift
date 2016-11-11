@@ -138,16 +138,40 @@ extension MapViewController: MKMapViewDelegate {
         }
         let reuseId = "pin"
         
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.animatesDrop = true
-            
-        } else{
-            pinView!.annotation = annotation
+            //look up User
+            if let mapPin = annotation as? MapPin{
+                if let image = Utils.stringToImage(str: mapPin.person?.avatarBase64){
+                    let resizedImage = Utils.resizeImage(image: image, maxSize: 20)
+                    pinView?.image = resizedImage
+                    pinView?.contentMode = .scaleToFill
+                    pinView?.clipsToBounds = false
+                }else{
+                    pinView?.image = nil
+                }
+                
+                //resize image
+            // let size = CGSize(width: 10, height: 10)
+               // UIGraphicsBeginImageContext(size)
+               // image!.draw(in: , blendMode: , alpha: )
+    
+                
+                
+               // pinView!.image = image
+               //add three lines borders
+               // pinView?.layer.cornerRadius = Constants.pinImageSize
+              
+           // }
+        
+       // } else{
+           // pinView!.annotation = annotation
+        }
         }
         return pinView
+        
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let mapPin = view.annotation as? MapPin, let people = mapPin.person, let name = people.userName, let userId = people.userId {
