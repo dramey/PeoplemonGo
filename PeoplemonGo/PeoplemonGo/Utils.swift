@@ -39,4 +39,26 @@ class Utils {
     class func formatNumber(_ amount: Double, prefix: String) -> String {
         return String(format: "\(prefix)$%.2f", abs(amount))
     }
+    //converts picture to string
+    class func imageToString(image: UIImage?) -> String?{
+        
+        if let image = image{
+            let pictureData = UIImagePNGRepresentation(image)
+            let pictureToString64 = pictureData?.base64EncodedString()
+            return pictureToString64
+        }else{
+            return nil
+        }
+    }
+    class func stringToImage(str: String?) -> UIImage?{
+        
+        if let str = str{
+           
+            let imageData = NSData(base64Encoded: str, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters)
+            let image = UIImage(data: imageData as! Data)
+            return image
+        }else{
+            return nil
+        }
+    }
 }

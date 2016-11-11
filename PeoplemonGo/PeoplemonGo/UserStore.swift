@@ -14,7 +14,7 @@ class UserStore {
     static let shared = UserStore()
     
     var selectedImage: UIImage?
-    
+    var user:User?
     private init() {}
     
     

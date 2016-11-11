@@ -42,15 +42,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }else{
             self.locationManager.requestWhenInUseAuthorization()
         }
-        mapView.mapType = MKMapType.hybrid     //
+        mapView.mapType = MKMapType.hybrid
         loadMap()
     }
     func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
        
         let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 500, 500)
         self.mapView.setRegion(myArea, animated: true)
-        updateLocation = false   //
-        locationManager.stopUpdatingLocation()    //
+        updateLocation = false   
+        locationManager.stopUpdatingLocation()
        
     }
     
@@ -63,6 +63,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidAppear(animated)
         if !WebServices.shared.userAuthTokenExists() || WebServices.shared.userAuthTokenExpired(){
             performSegue(withIdentifier: "PresentLoginNoAnimation", sender: self)
+        }else{
+            let user = User()
+            WebServices.shared.getObject(user, completion: { (user2, _) in
+                if let user2 = user2 {
+                    UserStore.shared.user = user2
+                }
+            })
+            
         }
     }
     
@@ -121,6 +129,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
    
         
     }
+    
 }
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{

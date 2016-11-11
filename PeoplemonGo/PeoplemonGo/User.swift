@@ -39,14 +39,17 @@ class User : NetworkModel {
         case changePassword
         case setPassword
         case register
-        case getUserInfo
+        case updateUserInfo
        
     }
     var requestType = RequestType.register
     
     
     // empty constructor
-    required init() {}
+    required init() {
+        requestType = .userInfo
+    
+    }
     
     // create an object from JSON
     required init(json: JSON) throws {
@@ -77,10 +80,10 @@ class User : NetworkModel {
         self.grantType = grantType
         requestType = .login
     }
-    init(fullName: String, avatarBase64: String) {
+    init(fullName: String, avatarBase64: String?) {
         self.fullName = fullName
         self.avatarBase64 = avatarBase64
-        requestType = .userInfo
+        requestType = .updateUserInfo
     }
     init(oldPassword: String, newPassword: String, confirmPassword: String) {
         self.oldPassword = oldPassword
@@ -111,7 +114,7 @@ class User : NetworkModel {
         self.lastCheckInLongitude = lastCheckInLongitude
         self.lastCheckInLatitude = lastCheckInLatitude
         self.lastCheckInDateTime = lastCheckInDateTime
-        requestType = .getUserInfo
+        requestType = .userInfo
     }
 
     
@@ -119,7 +122,7 @@ class User : NetworkModel {
     //determines the HTTP method we will use in our calls. Can use conditionals to determine this based on the endpoint we are calling or what we decide we would like to do
     func method() -> Alamofire.HTTPMethod {
         switch requestType{
-        case .getUserInfo:
+        case .userInfo:
           return .get
         default:
             return .post
@@ -139,7 +142,7 @@ class User : NetworkModel {
             return "/token"
         case .register:
             return "/api/Account/Register"
-        case .getUserInfo:
+        case .updateUserInfo:
             return "/api/Account/UserInfo"
         
         }
@@ -161,7 +164,10 @@ class User : NetworkModel {
             params[Constants.User.userName] = email as AnyObject?
             params[Constants.User.password] = password as AnyObject?
             print(params)
-            
+        
+        case .updateUserInfo:
+            params[Constants.User.fullName] = fullName as AnyObject?
+            params[Constants.User.avatarBase64] = avatarBase64 as AnyObject?
         default:
             break
         }

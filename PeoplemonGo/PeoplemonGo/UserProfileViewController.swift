@@ -12,32 +12,29 @@ class UserProfileViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var fullNameText: UITextField!
-    @IBOutlet weak var oldPassword: UITextField!
-    @IBOutlet weak var newPassword: UITextField!
     
     
     var gestureRecognizer: UITapGestureRecognizer!
     
     
-    
-    var profileUser = ProfileUser()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fullNameText.text = profileUser.fullName
-        oldPassword.text = profileUser.oldPassword
-        newPassword.text = profileUser.newPassword
-        
-        // Do any additional setup after loading the view.
-        
-        //if already has image we want to show it--if not we want to hide it
-        if let image = profileUser.image{
-            imageView.image = image
-            addGestureRecognizer()
+        if let user = UserStore.shared.user{
             
-        }else {
-            imageView.isHidden = true
+            
+            fullNameText.text = user.fullName
+            
+            
+            // Do any additional setup after loading the view.
+            
+            //if already has image we want to show it--if not we want to hide it
+            if let image = Utils.stringToImage(str: user.avatarBase64){
+                imageView.image = image
+                addGestureRecognizer()
+                
+            }else {
+                imageView.isHidden = true
+            }
         }
         
     }
@@ -70,8 +67,7 @@ class UserProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        profileUser.image = imageView.image
+       
     }
     
     
@@ -86,6 +82,43 @@ class UserProfileViewController: UIViewController {
     
     
     @IBAction func saveUser(_ sender: AnyObject) {
+        
+        guard let fullName = fullNameText.text, fullName != "" else {
+            //show error
+            let alert = Utils.createAlert("ERROR", message: "Please provide a Full Name", dismissButtonTitle: "Close")
+            present(alert, animated: true, completion: nil)
+            //need return or it just keeps on going on
+            return
+        }
+        let avatarImage = Utils.imageToString(image: imageView.image)
+        print("Avatar Size: \(avatarImage?.characters.count)")
+        //create userModel
+        let user = User(fullName: fullName, avatarBase64: avatarImage)
+        
+        
+        //call webservices
+        
+        WebServices.shared.postObject(user) { (object, error) in
+            if error == nil{
+                //hit save button and updating the user shared model--placing the info back where it was
+                UserStore.shared.user?.fullName = fullName
+                UserStore.shared.user?.avatarBase64 = avatarImage
+                let alert = Utils.createAlert("WONDERFUL", message: "You have an Image", dismissButtonTitle: "Close")
+                self.present(alert, animated: true, completion: nil)
+                
+            }else{
+                let alert = Utils.createAlert("ERROR", message: "Something went wrong", dismissButtonTitle: "Close")
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+            
+            
+        }
+        
+        
+        
+        //show save message
+        
     }
     
 }
@@ -99,7 +132,7 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
         
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
             //take original image and scale it down 512 x 512 pixels
-            let maxSize: CGFloat = 512
+            let maxSize: CGFloat = 128
             let scale = maxSize / image.size.width
             let newHeight = image.size.height * scale
             

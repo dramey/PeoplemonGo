@@ -96,7 +96,7 @@
                                     <action selector="logout:" destination="ptG-We-E16" id="0at-lh-8Wp"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="CheckIn" id="sNR-rt-JjR">
+                            <barButtonItem title="Refresh" id="sNR-rt-JjR">
                                 <connections>
                                     <action selector="CheckIn:" destination="ptG-We-E16" id="bFW-y5-wZ7"/>
                                 </connections>
@@ -125,7 +125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0k-Uh-i9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1042" y="-461"/>
+            <point key="canvasLocation" x="-1396" y="-684"/>
         </scene>
         <!--User Profile-->
         <scene sceneID="hXg-3S-UX4">
@@ -157,27 +157,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeN-9O-1ab">
-                                <frame key="frameInset" minX="16" minY="364" width="153" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghS-Le-MIL">
-                                <frame key="frameInset" minX="16" minY="402" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-Px-waq">
-                                <frame key="frameInset" minX="16" minY="440" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -198,13 +177,11 @@
                     <connections>
                         <outlet property="fullNameText" destination="WaE-Nq-v9D" id="hsJ-tx-Tla"/>
                         <outlet property="imageView" destination="o2J-8g-8x2" id="ycu-Wb-C0J"/>
-                        <outlet property="newPassword" destination="5g3-Px-waq" id="1Oa-CJ-vKz"/>
-                        <outlet property="oldPassword" destination="ghS-Le-MIL" id="mDc-4R-0Pa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIj-Xm-Tkt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-362" y="-461"/>
+            <point key="canvasLocation" x="-270" y="-461"/>
         </scene>
         <!--Login-->
         <scene sceneID="knc-qB-vOL">
