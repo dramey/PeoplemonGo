@@ -163,7 +163,6 @@ class Person: NetworkModel {
             params[Constants.Person.latitude] = latitude as AnyObject?
             params[Constants.Person.longitude] = longitude as AnyObject?
         case .catchPerson:
-            //needs work
             params[Constants.Person.caughtUserId] = caughtUserId as AnyObject?
             params[Constants.Person.radius] = radius as AnyObject?
            // params[Constants.Person.longitude] = longitude as AnyObject?

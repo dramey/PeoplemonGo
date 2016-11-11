@@ -5,10 +5,11 @@
 //  Created by Deb Ramey on 11/8/16.
 //  Copyright © 2016 Deb Ramey. All rights reserved.
 //
-
-import UIKit
+import Foundation
 import MapKit
-
+import Alamofire
+import MBProgressHUD
+import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -17,8 +18,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     var updateLocation = true
-    var latitudeDelta = 0.005
-    var longitudeDelta = 0.005
+    var latitudeDelta = 0.002
+    var longitudeDelta = 0.002
     var annotations: [MapPin] = []
     var overlay: MKOverlay?
     
@@ -28,7 +29,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         self.mapView.delegate = self
 
-        print("view loaded")
         // Do any additional setup after loading the view.
         self.locationManager.delegate = self
         self.locationManager.distanceFilter = kCLDistanceFilterNone
@@ -42,15 +42,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }else{
             self.locationManager.requestWhenInUseAuthorization()
         }
-        mapView.mapType = MKMapType.hybrid
+        mapView.mapType = MKMapType.hybrid     //
         loadMap()
     }
     func locationManager(_ manager:CLLocationManager, didUpdateLocations locations: [CLLocation]){
        
-        let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 1000, 1000)
+        let myArea = MKCoordinateRegionMakeWithDistance(self.locationManager.location!.coordinate, 500, 500)
         self.mapView.setRegion(myArea, animated: true)
-        updateLocation = false
-        locationManager.stopUpdatingLocation()
+        updateLocation = false   //
+        locationManager.stopUpdatingLocation()    //
        
     }
     
@@ -61,10 +61,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //print("view appeared")
         if !WebServices.shared.userAuthTokenExists() || WebServices.shared.userAuthTokenExpired(){
             performSegue(withIdentifier: "PresentLoginNoAnimation", sender: self)
-            //print("I got here")
         }
     }
     
@@ -116,23 +114,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //get the location
         if let location = locationManager.location{
             
-            
-            
-            //create user object with that location
-            let person = Person(longitude: location.coordinate.longitude, latitude: location.coordinate.latitude)
-            
-            //call webservices .post with the user object
-            WebServices.shared.postObject(person, completion: { (person, error) in
-                if let error = error {
-                    self.present(Utils.createAlert(message: error), animated: true, completion: nil)
-                }else{
-                    self.present(Utils.createAlert("Awesome!", message: "You are Checked In 😀"),  animated: true, completion: nil)
-                    
-                }
-                
-            })
-            
-            
+            let coordinate = location.coordinate
+      
         }
        loadMap()
    

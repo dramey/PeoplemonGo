@@ -115,11 +115,6 @@ class User : NetworkModel {
     }
 
     
-    
-    //init(id: String) {
-       // self.userName = id
-    //}
-    
     // Always return HTTP.GET
     //determines the HTTP method we will use in our calls. Can use conditionals to determine this based on the endpoint we are calling or what we decide we would like to do
     func method() -> Alamofire.HTTPMethod {
