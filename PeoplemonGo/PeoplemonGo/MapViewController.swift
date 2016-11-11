@@ -19,7 +19,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var updateLocation = true
     var latitudeDelta = 0.005
     var longitudeDelta = 0.005
-    //var peopleNearby = [MapPin]()
     var annotations: [MapPin] = []
     var overlay: MKOverlay?
     
@@ -89,7 +88,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 self.annotations = []
                 for person in nearbyPeople {
                     let pin = MapPin(person: person)
-                    //self.peopleNearby.append(pin)
                     self.annotations.append(pin)
                 }
                 self.mapView.addAnnotations(self.annotations)
@@ -185,14 +183,7 @@ extension MapViewController: MKMapViewDelegate {
         return renderer
     }
 }
-//extension MapViewController: UserStoreDelegate {
-    //func userLoggedIn() {
-       // NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(beginTimer), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-       // stopTimer()
-       // beginTimer()
-    //}
-//}
+
     
 
 

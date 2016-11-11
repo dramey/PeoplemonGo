@@ -88,9 +88,6 @@ class UserProfileViewController: UIViewController {
     @IBAction func saveUser(_ sender: AnyObject) {
     }
     
-    
-    
-    
 }
 extension UserProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     //implemented for us--no code--just include it--gives us the right to make functions to pull up picture or take camera pic
